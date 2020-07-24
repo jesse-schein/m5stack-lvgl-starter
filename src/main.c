@@ -8,7 +8,6 @@
   ******************************************************************************
 */
 
-
 #include "lvgl.h"
 #include "app_hal.h"
 
@@ -20,7 +19,7 @@ int main(void)
 
 	hal_setup();
 
-	demo_create();
+	lv_demo_benchmark();
 
 	hal_loop();
 }
