@@ -88,7 +88,7 @@ static void tft_flush(lv_disp_drv_t * drv, const lv_area_t * area, lv_color_t * 
 	y_fill_act = act_y1;
 	uint16_t data = color_p->full;
 
-  M5.Lcd.clear();
+  // M5.Lcd.clear();
   M5.Lcd.drawBitmap((int16_t)x1_flush, (int16_t)y1_flush, (int16_t)(x2_flush - x1_flush + 1),
     (int16_t)(y2_fill - y1_flush + 1),&data);
 }
