@@ -22,6 +22,9 @@
 #define LV_EX_MOUSEWHEEL   1       /*Add 'encoder' (mouse wheel) support to some examples (`lv_drivers` repository is required)*/
 #endif
 
+#define MADCTL_ML  	0x10
+#define TFT_RGB_BGR	0x08
+
 /*********************
  * DEMO USAGE
  *********************/
@@ -29,7 +32,7 @@
 /*Show some widget*/
 #define LV_USE_DEMO_WIDGETS        1
 #if LV_USE_DEMO_WIDGETS
-#define LV_DEMO_WIDGETS_SLIDESHOW  1
+#define LV_DEMO_WIDGETS_SLIDESHOW  0
 #endif
 
 /*Printer demo, optimized for 800x480*/

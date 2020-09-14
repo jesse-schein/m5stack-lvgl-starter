@@ -1,36 +1,27 @@
-/**
-  ******************************************************************************
-  * @file    main.c
-  * @author  Ac6
-  * @version V1.0
-  * @date    01-December-2013
-  * @brief   Default main function.
-  ******************************************************************************
-*/
-
-
 #include "lvgl.h"
+
 #include "../lv_ex_conf.h"
 #include "../lv_examples.h"
 
-#ifdef ESP32
-#include <Arduino.h>
-#include "../hal/m5stack/m5_hal.h"
-#include <M5Core2.h>
+#ifdef M5STACK
+  #include <Arduino.h>
+  #include <Ticker.h>
+  #include <app_hal.h>
+  #include <M5Core2.h>
+  #include <esp_log.h>
+  #define LVGL_TICK_PERIOD 20
+  Ticker tick; /* timer for interrupt handler */
 #else
 #include <app_hal.h>
 #endif
 
-#ifdef ESP32
-void setup(){
+#ifdef M5STACK
+static void lv_tick_handler(void)
+{
 
-}
-
-void loop(){
-  
+  lv_tick_inc(LVGL_TICK_PERIOD);
 }
 #endif
-
 
 // #include "lv_demo_benchmark.h"
 
@@ -39,6 +30,7 @@ int main(void)
 	lv_init();
 
 	hal_setup();
+  
 
 	// lv_demo_benchmark();
   // lv_ex_get_started1();
@@ -52,4 +44,16 @@ int main(void)
 	hal_loop();
 }
 
+#ifdef M5STACK
+void setup(){
+esp_log_level_set("*", ESP_LOG_VERBOSE);
+tick.attach_ms(LVGL_TICK_PERIOD, lv_tick_handler);
+ESP_LOGV("MAIN","Setting up Main");
+main();
+}
+
+void loop(){
+  lv_task_handler();
+}
+#endif
 
